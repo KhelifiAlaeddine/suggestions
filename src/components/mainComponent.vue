@@ -4,7 +4,7 @@
   //const messages = ["Message 1", "Message 2", "Message 3"];
   let message = ref("toto");
   function randomMessage() {
-    const randomIndex = Math.floor(Math.random() * this.messages.length);
+    const randomIndex = Math.floor(Math.random() * messages.length);
     message.value = messages[randomIndex];
   }
 </script>
