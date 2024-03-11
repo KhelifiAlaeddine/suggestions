@@ -6,23 +6,28 @@
   let coran = ref(false);
   let ayah = ref('');
 
-  async function fetchprayerTimes() {
+  async function fetchPrayerTimes() {
     const date = new Date();
-    let day = (date.toLocaleDateString()).replace(/\//g,"-");
-    let url = `https://api.aladhan.com/v1/timingsByAddress/${day}?address=tunis,tunisia`;
-    let prayerTimes;
-    const res = await fetch(url)
-    prayerTimes = await res.json();
-    prayerTimes = prayerTimes.data.timings
-    delete prayerTimes.Firstthird
-    delete prayerTimes.Midnight
-    delete prayerTimes.Lastthird
-    delete prayerTimes.Imsak
-    delete prayerTimes.Sunrise
-    delete prayerTimes.Sunset
-    return prayerTimes;
+    const day = date.toLocaleDateString().replace(/\//g, "-");
+    const url = `https://api.aladhan.com/v1/timingsByAddress/${day}?address=tunis,tunisia`;
 
-  }
+    try {
+        const res = await fetch(url);
+        const { data: { timings } } = await res.json();
+
+        // Remove unwanted keys from timings object
+        const unwantedKeys = ['Firstthird', 'Midnight', 'Lastthird', 'Imsak', 'Sunrise', 'Sunset'];
+        for (const key of unwantedKeys) {
+            delete timings[key];
+        }
+
+        return timings;
+    } catch (error) {
+        console.error("Error fetching prayer times:", error);
+        return null;
+    }
+}
+
 
   async function getCurrentPrayer() {
 
@@ -31,7 +36,7 @@
     const minutes = time.getMinutes();
     const currentTime = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
 
-    const prayerTimes = await fetchprayerTimes()
+    const prayerTimes = await fetchPrayerTimes()
 
     if (currentTime < prayerTimes.Fajr) {
         return "Pre-Fajr";
@@ -62,7 +67,7 @@
       pushToMessages("صليت العشاء؟")
     }
   }
-
+  editMessages();
   async function getRandomAyah() {
     let url = `https://api.quran.com/api/v4`;
     let randomAyah = {};
@@ -78,7 +83,7 @@
   }
 
   async function randomMessage() {
-    editMessages();
+    
     coran.value = false
     loading.value = true;
     const randomIndex = Math.floor(Math.random() * messages.length);

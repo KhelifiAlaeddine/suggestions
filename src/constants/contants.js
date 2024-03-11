@@ -11,7 +11,7 @@ const messages = [
     "زعمة تقرى شوية قرآن؟",
 ]
 function pushToMessages(value) {
-    messages.push(value);
+    messages[10] = value;
 }
   
 export  { messages, pushToMessages };
