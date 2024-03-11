@@ -8,7 +8,7 @@ const messages = [
     "شنية رايك تسأل على أسيل؟",
     "زعمة تسأل على آلاء؟",
     "شنية رايك تسبّح؟",
-    "زعمة تقرى شوية قرأن؟",
+    "زعمة تقرى شوية قرآن؟",
 ]
 function pushToMessages(value) {
     messages.push(value);
