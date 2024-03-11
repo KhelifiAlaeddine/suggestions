@@ -35,6 +35,10 @@ h1 {
   line-height: 1.1;
 }
 
+p {
+  margin: 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -45,6 +49,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-bottom: 10px;
 }
 button:hover {
   border-color: #646cff;
@@ -77,11 +82,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.message {
+  height: 40px;
+}
 /* HTML: <div class="loader"></div> */
 .loader-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 10px;
   justify-content: center;
 }
 .loader {

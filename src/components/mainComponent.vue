@@ -67,7 +67,6 @@
     const randomIndex = Math.floor(Math.random() * messages.length);
     message.value = messages[randomIndex];
     setTimeout(()=>{loading.value = false}, 2000);
-    console.log(await getCurrentPrayer()); 
   }
 
 
@@ -76,7 +75,7 @@
 <template>
   <div class="card">
     <button type="button" @click="randomMessage()">بسم الله الرحمن الرحيم</button>
-    <p v-if="!loading">{{ message }}</p>
+    <p class="message" v-if="!loading">{{ message }}</p>
     <div class="loader-wrapper">
       <div class ="loader" v-if="loading"></div>
     </div>
