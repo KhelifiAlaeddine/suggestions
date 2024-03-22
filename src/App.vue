@@ -1,5 +1,6 @@
 <script setup>
-import mainComponent from './components/mainComponent.vue'
+  import './gtm.js'
+  import mainComponent from './components/mainComponent.vue'
 </script>
 
 <template>
